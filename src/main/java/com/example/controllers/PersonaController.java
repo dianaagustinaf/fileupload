@@ -15,6 +15,13 @@ public class PersonaController {
     @Autowired
     private PersonaService personaService;
 
+
+    @GetMapping("/base")
+    public String base() {
+        return "base";
+    }
+
+
     @GetMapping("/listar")
     public String listar(Model model){
 
