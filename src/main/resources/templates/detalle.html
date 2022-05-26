@@ -15,7 +15,7 @@
             <div class="col-md-6">
                 
                 <div class="card" style="width: 18rem;">
-                    <img th:src="@{/imagenes/}+${persona.foto}" class="card-img-top" alt="Imagen de la persona">
+                    <img th:src="@{/recursos/}+${persona.foto}" class="card-img-top" alt="Imagen de la persona">
                     <div class="card-body">
                       <h5 class="card-title">Detalles </h5>
                       <p class="card-text" th:text="'Nombre: ' + ${persona.Nombre}"></p>
@@ -25,15 +25,8 @@
                   </div>
 
             </div>
-
-
         </div>
     </div>
-
-
-
-    
-
 
 
     <script th:replace="base :: scripts"></script>

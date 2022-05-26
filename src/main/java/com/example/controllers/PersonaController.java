@@ -44,10 +44,19 @@ public class PersonaController {
         return "listar";
     }
 
-    @GetMapping("/alta")
-    public String alta(Model model) {
+    @GetMapping("/alta/{id}")
+    public String alta(Model model, 
+                      @PathVariable(name = "id", required = false) Long id) {
+                    // parametro OPCIONAL (req. false) y los param opc van al FINAL
         
-        model.addAttribute("persona", new Persona());
+        if(id==0){  // ALTA
+
+            model.addAttribute("persona", new Persona());
+
+        } else {   // MODIFICACION
+            model.addAttribute("persona", personaService.findById(id));
+        }
+
         model.addAttribute("paises", paisService.findAll());
 
         return "formAlta";
@@ -60,10 +69,12 @@ public class PersonaController {
         
         if (!imagen.isEmpty()){
             //Ruta Relativa a la carpeta static donde por defecto se almacenan los archivos
-            Path imageFolder = Paths.get("src/main/resources/static/imagenes");
+            //(Path imageFolder = Paths.get("src/main/resources/static/imagenes");
 
             //construir la ruta absoluta de raiz
-            String rutaAbsoluta = imageFolder.toFile().getAbsolutePath();
+            //String rutaAbsoluta = imageFolder.toFile().getAbsolutePath();
+
+            String rutaAbsoluta = "/home/diana/pruebas/recursos/";
 
             // convertir en un array de bytes
             // sirve para cualquier tipo de archivos 
@@ -72,21 +83,22 @@ public class PersonaController {
                 byte[] imagenBytes = imagen.getBytes(); // (imagen x param)
 
                 // guardar este array en la ruta abs
-                Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + imagen.getOriginalFilename());
+                Path rutaCompleta = Paths.get(rutaAbsoluta + "/" + imagen.getOriginalFilename());
 
                 Files.write(rutaCompleta, imagenBytes);
 
                 // asignar al campo foto
                 persona.setFoto(imagen.getOriginalFilename());
 
-                //persistir el obj Persona en la bd
-                personaService.save(persona);
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
         }
+
+        //persistir el obj Persona en la bd
+        personaService.save(persona);
 
         return "redirect:/listar";
     }
