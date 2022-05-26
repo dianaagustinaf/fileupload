@@ -29,7 +29,7 @@ public class Persona implements Serializable {
     private String apellidos;
     private String foto;  
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Pais pais;
 
 }

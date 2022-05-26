@@ -10,6 +10,7 @@ import com.example.services.PersonaService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -113,6 +114,16 @@ public class PersonaController {
         return "detalle";
     }
 
+    @GetMapping("/borrar/{id}")
+    @Transactional
+    public String borrar(@PathVariable(name = "id") Long id) {
+        
+        personaService.delete(personaService.findById(id));
+
+        return "redirect:/listar";
+
+        // DELETE FROM `personas`.`persona` WHERE (`id` = '9');
+    }
 
 
 }
