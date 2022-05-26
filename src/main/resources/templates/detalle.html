@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="base :: cabecera">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle</title>
+</head>
+<body>
+    
+    <div class="container-fluid">
+        <h1>Detalles de la Persona</h1>
+        <div class="row">
+
+            <div class="col-md-6">
+                
+                <div class="card" style="width: 18rem;">
+                    <img th:src="@{/imagenes/}+${persona.foto}" class="card-img-top" alt="Imagen de la persona">
+                    <div class="card-body">
+                      <h5 class="card-title">Detalles </h5>
+                      <p class="card-text" th:text="'Nombre: ' + ${persona.Nombre}"></p>
+                      <p class="card-text" th:text="'Apellidos: ' + ${persona.Apellidos}"></p>
+                      <a href="/listar" class="btn btn-success">Volver al inicio</a>
+                    </div>
+                  </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+    
+
+
+
+    <script th:replace="base :: scripts"></script>
+</body>
+</html>
