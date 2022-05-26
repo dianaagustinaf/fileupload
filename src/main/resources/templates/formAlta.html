@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="base :: cabecera">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                
+                <h1>Formulario de Alta</h1>
+
+                <form th:action="@{/guardar}" th:object="${persona}" 
+                        method="post" enctype="multipart/form-data">
+
+                    <input type="text" placeholder="Nombre" th:field="*{Nombre}">
+                    <br>
+                    <input type="text" placeholder="Apellidos" th:field="*{Apellidos}">
+                    <br>
+                    <input type="file" name="file" placeholder="Foto" th:field="*{Foto}">
+                    <br>
+                    <label for="pais">Pais: </label>
+                    <select name="pais" id="pais">
+                        <option value="0"></option>
+                        <option th:each="pais : ${paises}" 
+                                th:value="${pais.id}" 
+                                th:text="${pais.Nombre}">
+                        </option>
+                    </select>
+                    <br>
+                    <input type="submit">
+                </form>
+            
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <script th:replace="base :: scripts"></script>
+</body>
+</html>
