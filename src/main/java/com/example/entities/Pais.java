@@ -28,7 +28,7 @@ public class Pais implements Serializable{
     private Long id;
     private String nombre;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, mappedBy = "pais")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "pais")
     private List<Persona> personas;
 
 }
